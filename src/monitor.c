@@ -24,6 +24,7 @@ void leerDirectorio(const char *str){
             break;
             case DT_LNK:
                 printf("Enlace: ");
+            break;
             default:
                 printf("Otro: ");
             break;
