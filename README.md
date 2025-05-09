@@ -49,10 +49,10 @@ Este proyecto en C implementa un **monitor de procesos** básico para sistemas L
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/Neud4n/monitor-procesos.git
+git clone https://github.com/Neud4n/process_monitor.git
 
 # Entrar al proyecto
-cd monitor-procesos
+cd process_monitor
 
 # Compilar
 make
