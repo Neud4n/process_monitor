@@ -1,8 +1,7 @@
-#include <sys/types.h>
+#define _DEFAULT_SOURCE // Para habilitar macros (DT_DIR, DT_REG, etc.)
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h> 
 #include <dirent.h>
-#include <libgen.h>
 #include "monitor.h"
 
 void leerDirectorio(const char *str){
@@ -10,15 +9,26 @@ void leerDirectorio(const char *str){
     struct dirent *dp;
 
     if((dir = opendir(str)) == NULL){
-        perror("No se pudo abrir ");
-        printf("%s\n", str);
-        exit(1);
+        fprintf(stderr, "Error al abrir el directorio %s\n", str);
+        perror("");
+        exit(EXIT_FAILURE);
     }
 
     while((dp = readdir(dir)) != NULL){
-        printf("Tipo: %i ", dp->d_type);
-        printf("Nombre: %s\n", dp->d_name);
+        switch(dp->d_type){
+            case DT_DIR:
+                printf("Directorio: ");
+            break;
+            case DT_REG:
+                printf("Archivo: ");
+            break;
+            case DT_LNK:
+                printf("Enlace: ");
+            default:
+                printf("Otro: ");
+            break;
+        }
+        printf("%s\n", dp->d_name);
     }
-
     closedir(dir);
 }
